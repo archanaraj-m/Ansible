@@ -22,7 +22,7 @@
     copy:
       src: /home/devops/Ansible/yamlfiles/mongodbplaybookconfig/mongod.conf
       dest: /etc/mongod.conf
-  - name: mongod restart
+  - name: mongodb restart
     systemd:
       name: mongod
       state: restarted
