@@ -12,13 +12,13 @@
     yum:
       name: mongodb-org
       state: latest
-  - name: reload daemon and start mongodb
+  - name: reload daemon and start mongod
     ansible.builtin.systemd:
-      name: mongodb
+      name: mongod
       daemon_reload: yes
       enabled: yes
       state: started
-  - name: cerate a copy of configuring mongodb
+  - name: cerate a copy of configuring mongod
     file:
       src: /home/devops/mongod.conf
       dest: /etc/mongod.conf
