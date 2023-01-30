@@ -20,7 +20,7 @@
       state: started
   - name: cerate a copy of configuring mongod
     file:
-      src: /home/devops/mongod.conf
+      src: /home/devops/Ansible/yamlfiles/mongodbplaybookconfig/mongod.conf
       dest: /etc/mongod.conf
   - name: mongodb restart
     systemd:
