@@ -1,0 +1,84 @@
+---
+- name: Install tomcat 10 on ubuntu 22
+  hosts: all
+  become: yes
+  vars: 
+    java_version: openjdk-11-jdk
+    group_name: tomcat
+    user_name: tomcat
+    user_home: /opt/tomcat
+    user_shell: /bin/false
+    tar_file_url: https://www-eu.apache.org/dist/tomcat/tomcat-10/v10.1.5/bin/apache-tomcat-10.1.5.tar.gz
+    tomcat_version: "tomcat-10.1.5"
+    tomcat_service_name: tomcat.service
+  tasks:
+    - name: java installation
+      ansible.builtin.apt:
+        name: "{{java_version}}"
+        update_cache: yes
+        state: present
+    - name: create a group
+      ansible.builtin.group:
+        name: "{{group_name}}"
+        state: present
+    - name: create a user
+      ansible.builtin.user:
+        name: "{{user_name}}"
+        create_home: yes
+        group: "{{group_name}}"
+        home: "{{user_home}}"
+        shell: "{{user_shell}}"
+        state: present
+    - name: extract tomcat
+      ansible.builtin.unarchive:
+        src: "{{tar_file_url}}"
+        remote_src: yes
+        dest: "{{user_home}}"
+    - name: create a symbolic link
+      ansible.builtin.file:
+        src: "{{user_home}}/apache-{{tomcat_version}}"
+        dest: "{{user_home}}/latest"
+        state: link
+    - name: change permissions
+      ansible.builtin.file:
+        dest: "{{user_home}}"
+        recurse: true
+        owner: "{{user_name}}"
+        group: "{{group_name}}"
+        state: directory
+    - name: add execute permissions to shell files
+      ansible.builtin.command: "sudo sh -c 'chmod +x {{user_home}}/latest/bin/*.sh'"
+    - name: Create a systemd unit file
+      ansible.builtin.copy:
+        src: "/home/devops/tomcat/{{tomcat_service_name}}"
+        dest: "/etc/systemd/system/{{tomcat_service_name}}"
+        owner: "{{user_name}}"
+        group: "{{group_name}}"
+    - name: reload daemon and start tomcat
+      ansible.builtin.systemd:
+        name: "{{tomcat_service_name}}"
+        daemon_reload: yes
+        enabled: yes
+        state: started
+    - name: create a system unit file
+      ansible.builtin.copy:
+        src: /home/devops/tomcat/tomcat-users.xml
+        dest: "{{user_home}}/latest/conf/tomcat-users.xml"  
+        owner: "{{user_name}}"
+        group: "{{group_name}}"
+    - name: create a manager copy file
+      ansible.builtin.copy:
+        src: /home/devops/tomcat/context.xml
+        dest: "{{user_home}}/latest/webapps/manager/META-INF/context.xml" 
+        owner: "{{user_name}}"
+        group: "{{group_name}}"
+    - name: create a host manager copy file
+      ansible.builtin.copy:
+        src: /home/devops/tomcat/context.xml
+        dest: "{{user_home}}/latest/webapps/host-manager/META-INF/context.xml"
+        owner: "{{user_name}}"
+        group: "{{group_name}}"
+    - name: restart the tomcat service
+      ansible.builtin.service:
+        name: tomcat
+        state: restarted       

@@ -1,0 +1,20 @@
+---
+- name: install springpetclinic on ubuntu
+  hosts: all
+  become: yes
+  tasks:
+    - name: install java
+      apt:
+        name: openjdk-11-jdk
+        update_cache: yes
+        state: present
+    - name: create a directory
+      file:
+        dest: /tmp
+        state: directory
+    - name: download springpet clinic
+      ansible.builtin.get_url:
+        url: https://referenceapplicationskhaja.s3.us-west-2.amazonaws.com/spring-petclinic-2.4.2.jar
+        dest: /tmp
+    - name: run spring petclinc
+      shell: java -jar /tmp/spring-petclinic/spring-petclinic-2.4.2.jar    

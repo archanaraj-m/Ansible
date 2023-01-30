@@ -1,0 +1,24 @@
+---
+- name: Install MongoDB on CentOS
+  hosts: all
+  become: true
+  tasks:
+  - name: Create MongoDB repository file
+    copy:
+      src: mongodb.repo
+      dest: /etc/yum.repos.d/mongodb.repo
+    become: true
+  - name: Install MongoDB
+    yum:
+      name: mongodb-org
+      state: latest
+  - name: reload daemon and start mongodb
+    ansible.builtin.systemd:
+      name: mongodb
+      daemon_reload: yes
+      enabled: yes
+      state: started
+  - name: cerate a copy of configuring mongodb
+    file:
+      src: /home/devops/mongod.conf
+      dest: /etc/mongod.conf

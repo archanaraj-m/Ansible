@@ -1,0 +1,19 @@
+---
+- name: Install MongoDB on Ubuntu
+  hosts: all
+  become: true
+  tasks:
+  - name: Add MongoDB repository
+    apt_repository:
+      repo: deb [arch=amd64] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse
+      state: present
+      update_cache: true
+  - name: Install MongoDB package
+    apt:
+      name: mongodb-org
+      state: present
+  - name: Start MongoDB service
+    service:
+      name: mongod
+      state: started
+      enabled: yes

@@ -1,0 +1,23 @@
+---
+- name: install jenkins
+  hosts: all
+  become: yes
+  tasks:
+    - name: install java
+      ansible.builtin.apt:
+        name: openjdk-11-jdk
+        update_cache: yes
+        state: present
+    - name: download jenkins
+      ansible.builtin.get_url:
+        url: https://updates.jenkins.io/download/war/2.385/jenkins.war
+        dest: /home/ubuntu/
+    - name: copy a file
+      copy:
+        src: jenkins.service
+        dest: /lib/systemd/system/jenkins.service
+    - name: service restart
+      systemd:
+        name: jenkins
+        enabled: yes
+        state: started    

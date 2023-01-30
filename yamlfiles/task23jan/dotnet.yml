@@ -1,0 +1,12 @@
+---
+- name: install dotnet on ubuntu
+  hosts: all
+  become: yes
+  vars: 
+    version: dotnet-sdk-6.0
+  tasks:
+    - name: install dotnet
+      ansible.builtin.apt:
+        name: "{{version}}"
+        update_cache: yes
+        state: present

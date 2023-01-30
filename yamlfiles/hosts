@@ -1,0 +1,12 @@
+172.31.10.81
+localhost
+
+[ubuntu]
+172.31.10.81
+localhost
+
+[centOS]
+172.31.45.202
+
+[webservers]
+web[01:10].qt.com

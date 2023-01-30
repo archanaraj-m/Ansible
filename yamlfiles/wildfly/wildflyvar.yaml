@@ -1,0 +1,86 @@
+---
+- name: Install wildfly on ubuntu 22
+  hosts: all
+  become: yes
+  vars:
+    java_package_name: openjdk-11-jdk
+    user_name: wildfly
+    group_name: wildfly
+    user_home: /opt/wildfly
+    user_shell: /sbin/nologin
+    copy_file: /tmp
+    copy_file_src: /tmp/wildfly-16.0.0.Final/
+    tar_file_url: https://download.jboss.org/wildfly/16.0.0.Final/wildfly-16.0.0.Final.tar.gz
+    tar_file_src: /tmp/wildfly-16.0.0.Final.tar.gz
+    wildfly_version: "wildfly_16.0.0.Final"
+    wildfly_service_name: wildfly.service
+  tasks:
+    - name: java installation
+      ansible.builtin.apt:
+        name: "{{java_package_name}}"
+        update_cache: yes
+        state: present
+    - name: create a wildfly group
+      ansible.builtin.group:
+        name: "{{group_name}}"       
+        state: present
+    - name: create a wildfly user
+      ansible.builtin.user:
+        name: "{{user_name}}"
+        create_home: yes
+        group: "{{group_name}}"
+        home: "{{user_home}}"
+        shell: "{{user_shell}}"
+        state: present
+    - name: create a file
+      ansible.builtin.file:
+        dest: "{{copy_file}}"
+        state: directory
+    - name: download wildfly 
+      ansible.builtin.get_url:
+        url: "{{tar_file_url}}"
+        dest: "{{copy_file}}"
+    - name: extract wildfly
+      ansible.builtin.unarchive:
+        src: "{{tar_file_src}}"
+        dest: "{{copy_file}}"
+        remote_src: yes
+    - name: copy a file
+      ansible.builtin.copy:
+        src: "{{copy_file_src}}"
+        dest: "{{user_home}}"
+        remote_src: yes
+    - name: change permissions
+      ansible.builtin.file:
+        dest: "{{user_home}}"
+        recurse: true
+        owner: "{{user_name}}"
+        group: "{{group_name}}"
+        state: directory
+    - name: create a directory
+      ansible.builtin.file:
+        name: /etc/wildfly
+        state: directory
+    - name: config copy file
+      copy:
+        src: "{{user_home}}/docs/contrib/scripts/systemd/wildfly.conf"
+        dest: /etc/wildfly/
+        remote_src: yes
+    - name: copy a file
+      ansible.builtin.copy:
+        src: "{{user_home}}/docs/contrib/scripts/systemd/launch.sh"
+        dest: "{{user_home}}/bin/"
+        remote_src: yes
+    - name: add execute permissions to shell files
+      ansible.builtin.command: "sudo sh -c 'chmod +x {{user_home}}/bin/*.sh'"
+    - name: Create a systemd copy file
+      ansible.builtin.copy:
+        src: "{{user_home}}/docs/contrib/scripts/systemd/{{wildfly_service_name}}"
+        dest: /etc/systemd/system/
+        remote_src: yes
+    - name: reload daemon and start wildfly
+      ansible.builtin.systemd:
+        name: "{{wildfly_service_name}}"
+        daemon_reload: yes
+        enabled: yes
+        state: started
