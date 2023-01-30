@@ -22,3 +22,7 @@
     file:
       src: /home/devops/mongod.conf
       dest: /etc/mongod.conf
+  - name: mongodb restart
+    systemd:
+      name: mongodb
+      state: restarted
