@@ -1,5 +1,5 @@
 ---
-- name: install java on centos
+- name: install java on ubuntu
   hosts: all
   become: yes
   vars: 

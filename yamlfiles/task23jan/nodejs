@@ -1,12 +1,12 @@
 ---
-- name: install java
+- name: install nodejs on ubuntu
   hosts: all
   become: yes
   vars: 
-    java_version: openjdk-11-jdk
+    nodejs_version: nodejs
   tasks:
-    - name: install java
+    - name: install nodejs
       ansible.builtin.apt:
-        name: "{{java_version}}"
+        name: "{{nodejs_version}}"
         update_cache: yes
         state: present
