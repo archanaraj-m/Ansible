@@ -5,6 +5,10 @@
   vars: 
     nodejs_version: nodejs
   tasks:
+    - name: create a directory
+      file:
+        dest: /tmp
+        state: directory
     - name: install nodejs
       get_url:
         url: curl -sL https://rpm.nodesource.com/setup_10.x | sudo bash -
