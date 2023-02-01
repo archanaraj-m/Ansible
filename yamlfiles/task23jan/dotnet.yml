@@ -3,7 +3,7 @@
   hosts: all
   become: yes
   vars: 
-    version: dotnet-sdk-6.0
+    version: dotnet-sdk-7.0
   tasks:
     - name: install package
       apt:
