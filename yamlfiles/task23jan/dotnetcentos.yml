@@ -1,0 +1,25 @@
+---
+- name: install dotnet on ubuntu
+  hosts: all
+  become: yes
+  vars: 
+    version: dotnet-sdk-6.0
+  tasks:
+    - name: create a directory
+      file:
+        dest: /tmp
+        state: directory
+    - name: download package repository
+      get_url:
+        url: https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm
+        dest: /tmp 
+    - name: install package
+      apt:
+        name: /tmp/packages-microsoft-prod.rpm
+        update_cache: yes
+        state: present
+    - name: install dotnet
+      ansible.builtin.apt:
+        name: "{{version}}"
+        update_cache: yes
+        state: present
