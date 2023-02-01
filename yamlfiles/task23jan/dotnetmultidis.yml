@@ -5,11 +5,11 @@
   vars: 
     version: dotnet-sdk-7.0
   tasks:
-    - name: install dotnet
-      ansible.builtin.apt:
-        name: "{{version}}"
-        update_cache: yes
+    - name: install package
+      apt:
+        name: apt-transport-https
         state: present
+        update_cache: yes
       when: ansible_facts['distribution'] == 'Ubuntu' 
     - name: create a directory
       file:
