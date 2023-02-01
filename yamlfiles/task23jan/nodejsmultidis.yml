@@ -15,7 +15,7 @@
       shell: curl -sL https://rpm.nodesource.com/setup_10.x | sudo bash -
       when: ansible_facts['distribution'] == 'CentOS'
     - name: install dotnet
-      ansible.builtin.yum:
+      ansible.builtin.package:
         name: "{{nodejs_version}}"
         update_cache: yes
         state: present
