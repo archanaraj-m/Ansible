@@ -1,0 +1,18 @@
+---
+- name: install java on centos
+  hosts: all
+  become: yes
+  vars: 
+    java_version: openjdk-11-jdk
+  tasks:
+    - name: install java
+      ansible.builtin.yum:
+        name: "{{java_version}}"   
+        update_cache: yes
+        state: present
+
+
+
+
+
+      
