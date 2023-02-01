@@ -14,11 +14,11 @@
         url: https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm
         dest: /tmp 
     - name: install package
-      apt:
+      yum:
         name: /tmp/packages-microsoft-prod.rpm
         state: present
     - name: install dotnet
-      ansible.builtin.apt:
+      ansible.builtin.yum:
         name: "{{version}}"
         update_cache: yes
         state: present
