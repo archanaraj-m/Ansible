@@ -1,0 +1,17 @@
+---
+- name: install nodejs on centos
+  hosts: all
+  become: yes
+  vars: 
+    nodejs_version: nodejs
+  tasks:
+    - name: install nodejs
+      get_url:
+        url: curl -sL https://rpm.nodesource.com/setup_10.x | sudo bash -
+        dest: /tmp
+    - name: install dotnet
+      ansible.builtin.yum:
+        name: "{{nodejs_version}}"
+        update_cache: yes
+        state: present
+  
