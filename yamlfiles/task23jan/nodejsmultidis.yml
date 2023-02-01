@@ -1,0 +1,22 @@
+---
+- name: install nodejs on ubuntu
+  hosts: all
+  become: yes
+  vars: 
+    nodejs_version: nodejs
+  tasks:
+    - name: install nodejs
+      ansible.builtin.apt:
+        name: "{{nodejs_version}}"
+        update_cache: yes
+        state: present
+      when: ansible_facts ['distribution'] == 'Ubuntu'
+    - name: install nodejs
+      shell: curl -sL https://rpm.nodesource.com/setup_10.x | sudo bash -
+      when: ansible_facts['distribution'] == 'CentOS'
+    - name: install dotnet
+      ansible.builtin.yum:
+        name: "{{nodejs_version}}"
+        update_cache: yes
+        state: present
+  
