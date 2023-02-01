@@ -5,13 +5,9 @@
   vars: 
     version: dotnet-sdk-6.0
   tasks:
-    - name: add apt repository
-      ansible.builtin.apt:
-        name: repository universe
-        state: present
     - name: install package
       apt:
-        name: /tmp/apt-transport-https
+        name: apt-transport-https
         state: present
         update_cache: yes
     - name: install dotnet
