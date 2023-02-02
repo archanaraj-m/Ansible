@@ -1,2 +1,3 @@
 ---
 # vars file for skelton
+version: dotnet-sdk-7.0
