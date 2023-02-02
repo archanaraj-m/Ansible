@@ -19,7 +19,7 @@
   yum:
     name: /tmp/packages-microsoft-prod.rpm
     state: present
-    when: ansible_facts['distribution'] == 'CentOS'
+  when: ansible_facts['distribution'] == 'CentOS'
 - name: install dotnet
   ansible.builtin.package:
     name: "{{version}}"
