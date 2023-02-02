@@ -1,0 +1,6 @@
+---
+ - name: call role
+   become: yes
+   hosts: all
+   roles:
+    - nodejsrole

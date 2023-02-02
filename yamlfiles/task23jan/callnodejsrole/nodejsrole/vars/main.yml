@@ -1,2 +1,3 @@
 ---
 # vars file for skelton
+nodejs_version: nodejs
