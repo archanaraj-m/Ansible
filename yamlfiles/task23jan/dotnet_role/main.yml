@@ -3,4 +3,4 @@
    become: yes
    hosts: all
    roles:
-     - dotnet_role
+     - dotnet
