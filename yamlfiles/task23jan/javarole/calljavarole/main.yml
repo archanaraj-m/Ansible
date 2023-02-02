@@ -1,0 +1,5 @@
+---
+- name: calling my roles
+  become: yes
+  roles:
+    role: java_role
