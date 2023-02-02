@@ -1,6 +1,0 @@
----
-- name: calling my roles
-  become: yes
-  hosts: all
-  roles:
-    role: java_role

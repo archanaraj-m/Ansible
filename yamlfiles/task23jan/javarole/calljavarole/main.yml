@@ -1,5 +1,6 @@
 ---
-- name: calling my roles
-  become: yes
-  roles:
-    role: javarole
+ - name: call role
+   become: yes
+   hosts: all
+   roles:
+     - javarole
