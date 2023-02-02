@@ -1,5 +1,5 @@
 ---
-# tasks file for skelton
+# tasks file for dotnet
 - name: install package
   apt:
     name: apt-transport-https

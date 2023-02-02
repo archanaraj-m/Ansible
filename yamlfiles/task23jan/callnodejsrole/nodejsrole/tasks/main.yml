@@ -1,6 +1,5 @@
 ---
 # tasks file for nodejs
-tasks:
 - name: install nodejs
   ansible.builtin.apt:
     name: "{{nodejs_version}}"
