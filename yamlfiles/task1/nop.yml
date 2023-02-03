@@ -25,7 +25,7 @@
         update_cache: yes
     - name: to configure nginx
       copy:
-        src: home/devops/QTtraining/Ansible/yamlfiles/task1/default
+        src: home/devops/Ansible/yamlfiles/task1/default
         dest: /etc/nginx/sites-available/default
         remote_src: yes   
     - name: create a directory
@@ -59,7 +59,7 @@
         state: directory
     - name: create nopcommerce service
       copy:
-        src: home/devops/QTtraining/Ansible/yamlfiles/task1
+        src: home/devops/Ansible/yamlfiles/task1/nopCommerce.service
         dest: /etc/systemd/system/nopCommerce.service
         state: start
     - name: restart nginx
