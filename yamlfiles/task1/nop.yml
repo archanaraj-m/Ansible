@@ -26,7 +26,8 @@
     - name: to configure nginx
       copy:
         src: home/devops/QTtraining/Ansible/yamlfiles/task1
-        dest: /etc/nginx/sites-available/default   
+        dest: /etc/nginx/sites-available/default
+        remote_src: yes   
     - name: create a directory
       file:
         dest: /var/www/nopCommerce
