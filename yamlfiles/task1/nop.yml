@@ -21,7 +21,7 @@
           - apt-transport-https
           - aspnetcore-runtime-7.0
           - nginx
-        state: start
+        state: present
         update_cache: yes
     - name: to configure nginx
       copy:
