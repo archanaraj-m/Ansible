@@ -32,41 +32,32 @@
         src: https://github.com/nopSolutions/nopCommerce/releases/download/release-4.60.1/nopCommerce_4.60.1_NoSource_linux_x64.zip
         dest: /var/www/nopCommerce
         remote_src: yes
-
+    - name: install unzip
+      apt:
+        name: unzip
+        state: present
+    - name: unarchive the unzip
+      unarchive:
+        src: nopCommerce_4.60.1_NoSource_linux_x64.zip
+        dest: /var/www/nopCommerce
+    - name: create directory
+      file:
+        path:
+          - home/devops/var/www/nopCommerce/bin
+          - home/devops/var/www/nopCommerce/logs
+        state: directory     
     - name: Set permissions for nopCommerce files
       file:
         path: /var/www/nopCommerce
         owner: www-data
         group: www-data
-        mode: 0755
         state: directory
-
-    - name: Run NopCommerce database setup
-      command: dotnet /var/www/nopCommerce/nopCommerce.dll setup
-      args:
-        chdir: /var/www/nopCommerce
-        
-    - name: Configure Nginx to serve NopCommerce
-      become: yes
+    - name: create nopcommerce service
       copy:
-        dest: /etc/nginx/sites-available/nopCommerce
-        content: |
-          server {
-              listen 80;
-              server_name example.com;
-              root /var/www/nopCommerce;
-              location / {
-                  proxy_pass http://127.0.0.1:5000;
-                  proxy_http_version 1.1;
-                  proxy_set_header Upgrade $http_upgrade;
-                  proxy_set_header Connection keep-alive;
-                  proxy_set_header Host $host;
-                  proxy_cache_bypass $http_upgrade;
-              }
-          }
-      notify:
-        - restart nginx
-
-  handlers:
+        src: home/devops/QTtraining/Ansible/yamlfiles/task1
+        dest: /etc/systemd/system/nopCommerce.service
+        state: start
     - name: restart nginx
-      service: name=nginx state=restarted
+      service:
+        name: nginx
+        state: restarted
