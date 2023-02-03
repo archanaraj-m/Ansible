@@ -48,10 +48,9 @@
         owner: www-data
         group: www-data
         state: directory
-        remote_src: yes
     - name: create nopcommerce service
       copy:
-        src: home/devops/Ansible/yamlfiles/task1/nopCommerce.service
+        src: /home/devops/Ansible/yamlfiles/task1/nopCommerce.service
         dest: /etc/systemd/system/nopCommerce.service
         state: start
     - name: restart nginx
