@@ -13,7 +13,7 @@
         dest: /tmp
     - name: Install packages
       apt: 
-        name: packages-microsoft-prod.deb
+        deb: packages-microsoft-prod.deb
         state: present
     - name: install dotnet
       apt:
