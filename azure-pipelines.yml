@@ -1,0 +1,12 @@
+---
+pool:
+  nmae: "Default"
+  vmImage: 'Ubuntu-latest'
+   
+trigger:
+  - main
+
+steps:
+  - script: 'ansible-playbook -i hosts wildfly.yml'
+    workingDirectory:  /wildfly
+    displayName: install wildfly
