@@ -1,0 +1,14 @@
+[Unit]
+Description=springpetclinic service
+After=network.target
+
+[Service]
+Environment="JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd-64"
+WorkingDirectory=/home/ubuntu
+Type=simple
+ExecStart=java -jar sprinpetclinic-3.0.0-SNAPSHOT.jar
+Restart=on-failure
+RestartSec=15
+
+[Install]
+WantedBy=multi-user.target
