@@ -61,10 +61,109 @@ ansible --version
 
 
 ---------------------------------------------------------------------------------------------------------------------------------------
+
 Task-2, 31-05-2023 and 01-06-2023
 -------------------------------------------
- 1. Install apache,nginx and java11 manually and later with playbook.
- 2. now write a playbook for each node to get php info page (you can use handler)
+
+1. Install apache,nginx and java11 manually and later with playbook.
+* create 3 instances 2 are nodes for install apache and nginx this 2 are run on same port so we take 2 different nodes and in that only we do install java & 1 is ACN
+* write yaml files after that copy and paste it in ACN with names .yml(ex:apache.yml)
+nginx:
+------
+
+```yml
+---
+- name: install nginx on ubuntu
+  hosts: all
+  become: yes
+  tasks:
+  - name: install nginx
+    ansible.builtin.apt:
+      name: nginx
+      update_cache: yes
+      state: present
+     
+```
+* And nodes private IP address paste in ``vi hosts``
+* playbook syntax check with this command``ansible-playbook -i hosts --syntax-check nginx.yml``
+* Run playbook with this command``ansible-playbook -i hosts nginx.yml``
+![preview](../../ansibleimages/ans8.png)
+![preview](../../ansibleimages/ans9.png)
+
+JAVA
+----
+
+* Install java on ubuntu manual commands are
+```
+sudo apt update
+sudo apt install openjdk-11-jdk -y
+java-- version
+```
+* playbook for java
+```yml
+---
+- name: install java on ubuntu
+  hosts: all
+  become: yes
+  tasks:
+    - name: install java
+      ansible.builtin.apt:
+        name: openjdk-11-jdk
+        update_cache: yes
+        state: present                           
+```
+* First paste playbook``vi java.yml``&&``vi hosts``
+* run the play book commands are same ``ansible-playbook -i hosts --syntax-check java.yml``&&``ansible-playbook -i hosts java.yml``
+![preview](../../ansibleimages/ans10.png)
+* check the java version in another node ``java--version``
+![preview](../../ansibleimages/ans11.png)
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 1. now write a playbook for each node to get php info page (you can use handler)
 ---------------------------------------------------------------------------------------------------------------------------------------
 Task-3, 02-06-2023
 -----------------------
