@@ -1,6 +1,6 @@
 ---
 pool:
-  nmae: "Default"
+  name: "Default"
   vmImage: 'Ubuntu-latest'
    
 trigger:
