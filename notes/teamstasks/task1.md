@@ -2,7 +2,8 @@
 ################################# ANSIBLE TASKS ########################################
 ---------------------------------------------------------------------------------------------------------------------------------------
 Task-1, 30-05-2023
------------------
+------------------
+[referhere](https://directdevops.blog/2023/05/27/devops-classroomnotes-27-may-2023/) for ansible , yaml&json diference
  1. Ansible controlNode and Node configuration
         1. take 3 machines
             1. controlNode(ubuntu)
@@ -154,9 +155,23 @@ sudo systemctl status apache2
 * run the play book commands are same ``ansible-playbook -i hosts --syntax-check apache.yml``&&``ansible-playbook -i hosts apache.yml``
  
 2. now write a playbook for each node to get php info page (you can use handler) 
-* Install php on ubuntu manual commands are
+
+Handlers: running operations on change
+---------
+* Sometimes you want a task to run only when a change is made on a machine. For example, you may want to restart a  service if a task updates the configuration of that service, but not if the configuration is unchanged. Ansible uses handlers to address this use case. Handlers are tasks that only run when notified.
+[referhere](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_handlers.html#handlers)for the handlers documentation
+* Install php with apache2 on ubuntu manual commands are
 ```
 sudo apt update
+sudo apt install php libapache2-mod-php
+sudo systemctl restart apache2
+```
+* Install php with nginx on ubuntu manual commands are
+```
+sudo apt update
+sudo apt install php-fpm
+systemctl status php-fpm
+```
  
  
  
