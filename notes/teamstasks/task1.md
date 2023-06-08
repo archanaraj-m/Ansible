@@ -62,6 +62,7 @@ ansible --version
 ![preview](../../ansibleimages/ans7.png)
 
 * For centOS also same process but commands are ``sudo yum update``
+
 ---------------------------------------------------------------------------------------------------------------------------------------
 
 Task-2, 31-05-2023 and 01-06-2023
@@ -157,6 +158,8 @@ sudo systemctl status apache2
 ![preview](../../ansibleimages/ans12.png)
 * copy another node publicIp and paste it in new tab then nginx page came
 ![preview](../../ansibleimages/ans13.png)
+
+
  
 1. now write a playbook for each node to get php info page (you can use handler) 
 
@@ -170,13 +173,13 @@ sudo apt update
 sudo apt install php libapache2-mod-php
 sudo systemctl restart apache2
 ```
-* Install php with nginx on ubuntu manual commands are
+* If install php with nginx on ubuntu manual commands are
 ```
 sudo apt update
 sudo apt install php-fpm
 systemctl status php-fpm
 ```
- 
+* In this we used group variables also [referhere](https://github.com/asquarezone/AnsibleZone/blob/master/May23/inventory/group_vars/webserver.yaml) like this we used group variables.
  
  
  
