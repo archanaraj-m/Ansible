@@ -41,6 +41,7 @@ cd
 ```
 ssh-copy-id username@anothernode privateIP address       
 #like ssh-copy-id devops@172.31.14.123
+ssh devops@172.31.14.123
 echo 172.31.14.123(anothernode private IPaddress) > inventory 
 #like this echo 172.31.14.123 > inventory
 cat inventory
@@ -60,7 +61,7 @@ ansible --version
 * In node 1 we can create only user and passwd authntication yes and give sudoers permission
 ![preview](../../ansibleimages/ans7.png)
 
-
+* For centOS also same process but commands are ``sudo yum update``
 ---------------------------------------------------------------------------------------------------------------------------------------
 
 Task-2, 31-05-2023 and 01-06-2023
@@ -97,7 +98,7 @@ systemctl status nginx
 * playbook syntax check with this command``ansible-playbook -i hosts --syntax-check nginx.yml``
 * Run playbook with this command``ansible-playbook -i hosts nginx.yml``
 ![preview](../../ansibleimages/ans8.png)
-* copy another node publicIp and paste it in new tab then nginx pag ecame
+* copy another node publicIp and paste it in new tab then nginx page came
 ![preview](../../ansibleimages/ans9.png)
 
 JAVA
@@ -144,17 +145,20 @@ sudo systemctl status apache2
   hosts: all
   become: yes
   tasks:
-    - name: install apache
+    - name: install apache2
       ansible.builtin.apt:
-        name: 
+        name: apache2
         update_cache: yes
         state: present 
 ```
 
 * First paste playbook``vi apache.yml``&&``vi hosts``
 * run the play book commands are same ``ansible-playbook -i hosts --syntax-check apache.yml``&&``ansible-playbook -i hosts apache.yml``
+![preview](../../ansibleimages/ans12.png)
+* copy another node publicIp and paste it in new tab then nginx page came
+![preview](../../ansibleimages/ans13.png)
  
-2. now write a playbook for each node to get php info page (you can use handler) 
+1. now write a playbook for each node to get php info page (you can use handler) 
 
 Handlers: running operations on change
 ---------
