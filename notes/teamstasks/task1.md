@@ -181,15 +181,137 @@ systemctl status php-fpm
 ```
 * In this we used group variables also [referhere](https://github.com/asquarezone/AnsibleZone/blob/master/May23/inventory/group_vars/webserver.yaml) like this we used group variables.
  
- 
- 
- 
- 
- 
- 
- 
- 
- 
+* First I create another two nodes one is ubuntu and one is redhat(centos not connected so i can take redhat)
+* After creating that two nodes connect and execute below commands
+#For ubuntu
+```
+sudo apt update 
+sudo vi /etc/ssh/sshd_config #passwd yes
+sudo systemctl restart sshd
+sudo adduser devops
+sudo visudo
+su devops
+```
+#For Redhat
+```
+sudo yum update 
+sudo vi /etc/ssh/sshd_config #passwd yes
+sudo systemctl restart sshd
+sudo adduser devops
+sudo passwd devops
+sudo visudo
+su devops
+```
+![preview](../../ansibleimages/ans14.png)
+![preview](../../ansibleimages/ans15.png)
+* In redhat password authntication remove# only 
+![preview](../../ansibleimages/ans16.png)
+* After creating the devops user in two nodes then this nodes connected to the ACN with below commands
+```
+ssh-copi-id devops@<node privateIP>
+ssh devops@<node privateIP>
+exit
+echo nodeprivateIP > inventory # if needed
+cat inventory
+```
+* Next copy and paste the playbook and host files into ACN with``vi hosts``&&``vi <filename>.yml``ex``vi ubuntu.yml``
+* vi hosts file
+```yml
+[ubuntu]
+172.31.21.199
+[redhat]
+172.31.29.33
+
+[webserver]
+172.31.21.199
+172.31.29.33
+
+```
+* vi redhat.yml
+```yml
+---
+- name: install lamp server on ubuntu
+  hosts: all
+  become: yes
+  tasks:
+    - name: install apache2 server
+      ansible.builtin.yum:
+        name: httpd
+        state: present
+    - name: enable and start apache
+      ansible.builtin.systemd:
+        name: httpd
+        enabled: yes
+        state: started
+    - name: install apache2 server
+      ansible.builtin.yum:
+        name: php
+        state: present
+      notify:
+        - restart apache2
+    - name: copy the info.php file
+      ansible.builtin.copy:
+        src: info.php
+        dest: /var/www/html/info.php
+      notify:
+        - restart apache2
+  handlers:
+    - name: restart apache2
+      ansible.builtin.systemd:
+        name: httpd
+        state: restarted                     
+```
+* vi ubuntu.yml
+```yml
+---
+- name: install lamp server on ubuntu
+  hosts: all
+  become: yes
+  tasks:
+    - name: update packages and install apache
+      ansible.builtin.apt:
+        name: apache2
+        update_cache: yes
+        state: present
+    - name: install php packages
+      ansible.builtin.apt:
+        name:
+          - php
+          - libapache2-mod-php
+          - php-mysql
+        state: present
+      notify:
+        - restart apache2
+    - name: copy the info.php page
+      ansible.builtin.copy:
+        src: info.php
+        dest: /var/www/html/info.php
+      notify:
+        - restart apache2
+  handlers:
+    - name: restart apache2
+      ansible.builtin.systemd:
+        name: apache2
+        state: restarted
+```
+* vi info.php
+```php
+<?php phpinfo(); ?>
+```
+* Above all files paste in ACN
+![preview](../../ansibleimages/ans17.png)
+* Then check the playbook``ansible-playbook -i hosts --syntax-check redhat.yml``
+* To run the playbook``ansible-playbook -i hosts redhat.yml``
+![preview](../../ansibleimages/ans18.png)
+* Next change inventory file then execute ubuntu playbook
+* Then check the playbook``ansible-playbook -i hosts --syntax-check ubuntu.yml``
+* To run the playbook``ansible-playbook -i hosts ubuntu.yml``
+![preview](../../ansibleimages/ans19.png)
+* After that copy the node publis IP and paste in newtab with /info.php then php page came
+![preview](../../ansibleimages/ans20.png)
+* Redhat publicIP copy and paste in newtab with /info.php
+![preview](../../ansibleimages/ans21.png)
+
  
  
  
