@@ -311,37 +311,6 @@ cat inventory
 ![preview](../../ansibleimages/ans20.png)
 * Redhat publicIP copy and paste in newtab with /info.php
 ![preview](../../ansibleimages/ans21.png)
-
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
  
 ---------------------------------------------------------------------------------------------------------------------------------------
 Task-3, 02-06-2023
