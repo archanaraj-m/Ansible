@@ -51,7 +51,7 @@
        dest: /var/www/html/info.php
        content:   
          <?php
-         phpinfo();
+         phpinfo()
          ?>
 
 

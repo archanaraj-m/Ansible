@@ -316,7 +316,46 @@ cat inventory
 Task-3, 02-06-2023
 -----------------------
  1. install metricbeat installation on ubuntu vm.(Manually)
- 2. install metricbeat installation on ansible nodes by playbook.
+* [refer here](https://www.elastic.co/guide/en/beats/metricbeat/current/setup-repositories.html)for documentation
+* Same as it is follow above document
+![preview](./moniterimages/mon2.png)
+![preview](./moniterimages/mon3.png)
+* use this command to configure the elastic search with local host``sudo vi /etc/metricbeat/metricbeat.yml`` in this edit cloudID and cloud auth see the preview7 in that cloud ID is there.
+* password is in the credentials save it.
+* If we want to reset password goto security it is below the deployments.
+![preview](./moniterimages/mon4.png)
+* Enable the nginx module``sudo metricbeat modules enable nginx``
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+2. install metricbeat installation on ansible nodes by playbook.
 ----------------------------------------------------------------------------------------------------------------------------------------
 Task-4, 03-06-2023
 -----------------------
