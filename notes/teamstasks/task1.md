@@ -208,7 +208,7 @@ su devops
 ![preview](../../ansibleimages/ans16.png)
 * After creating the devops user in two nodes then this nodes connected to the ACN with below commands
 ```
-ssh-copi-id devops@<node privateIP>
+ssh-copy-id devops@<node privateIP>
 ssh devops@<node privateIP>
 exit
 echo nodeprivateIP > inventory # if needed
@@ -326,37 +326,42 @@ Task-3, 02-06-2023
 ![preview](./moniterimages/mon4.png)
 * Enable the nginx module``sudo metricbeat modules enable nginx``
 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
 2. install metricbeat installation on ansible nodes by playbook.
 ----------------------------------------------------------------------------------------------------------------------------------------
+## To install metricbeat in ansible 
+```yml
+---
+- name: installing metricbeat
+  hosts: all
+  become: yes
+  tasks:
+    - name: metricbeat install
+      apt_key:
+        url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+        state: present
+    - name: installing trasport https
+      ansible.builtin.apt:
+        name: apt-transport-https
+        update_cache: yes
+        state: present
+    - name: Save the repository definition to path
+      ansible.builtin.shell:
+        cmd: echo "deb https://artifacts.elastic.co/packages/8.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-8.x.list
+    - name: Save the repository definition to path
+      ansible.builtin.shell:
+        cmd: echo "deb https://artifacts.elastic.co/packages/oss-8.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-8.x.list
+    - name: installing metricbeat
+      ansible.builtin.apt:
+        name: metricbeat
+        update_cache: yes
+        state: present
+    - name: enable metricbeat
+      ansible.builtin.service:
+        name: metricbeat
+        enabled: true
+        state: started
+
+```        
 Task-4, 03-06-2023
 -----------------------
  1. install NOPCommerce Manually.
@@ -366,6 +371,6 @@ Task-5, 04-06-2023
 -----------------------
  1. Install the below applications manually.
     1. Broadleaf
-    2. OpenMRS
+    2. OpenMRS[referhere](https://masabagerald.medium.com/how-to-install-openmrs-in-ubuntu-server-20-04-826b5d727c6)
  2. After successful Installations of above applications write playbooks execute them.
 ---------------------------------------------------------------------------------------------------------------------------------------
