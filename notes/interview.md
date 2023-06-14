@@ -42,6 +42,20 @@ Architecture of Ansible
     * adhoc commands
     * playbooks
 * Playbooks are YAML files.
+
+# Inventory
+* Inventory in Ansible represents the hosts which we need to connect to.
+* Ansible inventory is broadly classified into two types
+     * static inventory: where we mention the list of nodes to connect to in some file
+     * dynamic inventory: where we mention some script/plugin which will dynamically find out the nodes to connect to
+* As of now lets focus on static inventory
+[ReferHere](https://docs.ansible.com/ansible/latest/inventory_guide/intro_inventory.html#inventory-basics-formats-hosts-and-groups) for official docs on Ansible inventory
+Static inventory can be mentioned in two formats
+ini
+yaml
+Ini format: An INI file is a configuration file for computer software that consists of a text-based content with a structure and syntax comprising key–value pairs for properties, and sections that organize the properties.
+Refer Here for the changes to include groups and same inventory across redhat and ubuntu instances
+list hosts
 # How Operations Team work on multiple servers
 * Organizations will have lot of servers and lot of admins
 * Creating individual logins on each server for every admin is not a feasible solution.
@@ -83,4 +97,56 @@ or in another module
         recurse: yes
         mode: g+rx
 ```
-  
+# Facts
+* ansible collects information about the node on which it is executing by the help of module called as setup
+* Ansible playbook by default collects information about nodes where it is executing, we can use this with the help of variables
+* [referhere](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_conditionals.html)
+* Collecting information can be disabled as well
+```
+---
+- name: do something
+  hosts: all
+  gather_facts: no
+  ...
+  ...
+```
+* In the playbook the facts will be collected and will be available in a special variables ``ansible_facts``
+* Consider the below playbook
+```
+---
+- name: exploring facts
+  become: no
+  hosts: all
+  tasks:
+    - name: print os details
+      ansible.builtin.debug:
+        msg: "family: {{ ansible_facts['os_family'] }} distribution: {{ ansible_facts['distribution'] }}"
+```
+* The statement ``ansible_facts['os_family']`` represents accessing os family from the facts collected
+* From facts the variables can be accessed with full names ``ansible_default_ipv4 or ansible_facts['default_ipv4']``
+```
+---
+- name: exploring facts
+  become: no
+  hosts: all
+  tasks:
+    - name: print os details
+      ansible.builtin.debug:
+        var: ansible_default_ipv4
+    - name: same info
+      ansible.builtin.debug:
+        var: ansible_facts['default_ipv4']
+```
+
+* Lets apply conditionals to ansible playbook Refer Here
+* [ReferHere](https://github.com/asquarezone/AnsibleZone/commit/ef0124420924044954c6d535e9de3ba8ac54e24e) for the changeset and focus on combined.json
+# Explore
+* Explore the verbosity levels of execution i.e -v, -vv , -vvv ..
+* Write an ansible adhoc command to install git on node1
+```
+sudo apt install git
+sudo yum install git 
+```
+# Roles
+* Roles let you automatically load related vars, files, tasks, handlers, and other Ansible artifacts based on a known file structure. After you group your content in roles, you can easily reuse them and share them with other users.
+[referhere](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_reuse_roles.html)
