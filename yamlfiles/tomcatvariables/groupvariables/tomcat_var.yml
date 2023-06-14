@@ -1,0 +1,10 @@
+java_version: openjdk-11-jdk
+group: tomcat
+user: tomcat
+home_dir: /opt/tomcat
+shell: /bin/false
+tomcat_main_ver: 10
+tomcat_ver: 10.1.9
+tomcat_user_name: archana
+tomcat_user_pwd: password123
+tomcat_context_valve_allow: ".*"

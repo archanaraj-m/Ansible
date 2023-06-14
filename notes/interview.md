@@ -73,5 +73,14 @@ example:
 ansible.builtin.shell:
   cmd: "chmod +x {{ homedir }}/latest/bin/*.sh"
 ```
-
+or in another module
+```
+- name: Change conf permissions
+      ansible.builtin.file:
+        path: conf
+        group: tomcat
+        owner: tomcat
+        recurse: yes
+        mode: g+rx
+```
   
