@@ -153,7 +153,6 @@ sudo yum install git
 
 # Anisble interview questions
 * [referhere](https://intellipaat.com/blog/interview-question/ansible-interview-questions/)
-* [referhere](https://intellipaat.com/blog/tutorial/devops-tutorial/ansible-basic-cheat-sheet/)
 # YAML (Yet Another Markup Language)
 * Domain-Specific Language (DSL)-example:puppet,chef
 
@@ -176,6 +175,7 @@ Push Architecture: The core concept is to push multiple small codes to configure
 Set Up: This is very easy to set up, with a very low learning curve. It is open-source, so anyone can access it.
 Manage Inventory: Machines’ addresses are stored in a simple text format, and we can add different sources of truth to pull the list using plug-ins such as OpenStack, Rackspace, etc.
 Go through this Ansible Cheat Sheet. This is a very useful handbook.
+* [referhere](https://intellipaat.com/blog/tutorial/devops-tutorial/ansible-basic-cheat-sheet/)
 
 4. What are the advantages of Ansible?
 Ansible has many strengths, which include the following:
@@ -186,17 +186,17 @@ It requires minimal resources, so there is low overhead.
 It is easy to learn and understand since Ansible tasks are written in YAML.
 Unlike other tools, most of which are procedural, Ansible is declarative; it defines the desired state and fulfills the requirements needed to achieve it.
 5. What is the Ansible Galaxy?
+* Ansible galaxy is nothing but roles ,clients are created roles and send it in ansible-galaxy,and we are also created our own role and send itin galaxy 
 Ansible can communicate with configured clients from the command line by using the Ansible command. It also allows you to automate configuration by using the Ansible-playbook command. To create the base directory structure, you can use a tool bundled with Ansible, known as Ansible Galaxy.
 
 Command: ansible-galaxy init azavea. Packer
 Check out this Ansible tutorial and practice for getting a better understanding of Ansible.
 
-6. What is CI/CD?
+1. What is CI/CD?
 Continuous Integration (CI) is something that is used for streamlining the development and deployment processes. This has led to the rapid development of cohesive software. Each integration is verified by an automated build to detect integration errors as quickly as possible.
 
 With Continuous Delivery (CD), your code can be taken to production at any time after being pushed to a remote repository. It is, in simpler words, a process where you build software in such a way that it can be released to production at any time.
 
-Ansible CICD
 7. What is configuration management?
 Configuration Management (CM) is a practice that we should follow to keep track of all updates that are going into the system over a period of time. This also helps in a situation where a major bug has been introduced to the system due to some new changes that need to be fixed with minimum downtime. CM keeps track of all updates that are needed in a system and ensures that the current design and build state of the system are up-to-date and properly functional.
 8. What are the requirements for the Ansible server?
@@ -234,8 +234,6 @@ A tag is an attribute that sets the Ansible structure, plays, tasks, and roles. 
 
 14.  Which protocol does Ansible use to communicate with Linux and Windows?
 In Linux systems, the Secure Shell (SSH) protocol is employed, while Windows systems utilize the Windows Remote Management (WinRM) protocol.
-
-Also, have a look at our DevOps course in Bengaluru if you are looking for a DevOps certification!
 
 15. What are ad hoc commands? Give an example.
 Ad hoc commands are simple, one-line commands used to perform a certain task. You can think of ad hoc commands as an alternative to writing playbooks. An example of an ad hoc command is as follows:
@@ -342,9 +340,7 @@ This can be done by using the following command:
 
 ansible -m debug -a "var=hostvars['hostname']" localhost
 24. Explain Ansible facts.
-Ansible facts can be thought of as a way for Ansible to get information about a host and store it in variables for easy access. This information, which is stored in predefined variables, is available for use in the playbook. To generate facts, Ansible runs the set-up module.
-
-Learn from our blog Getting Started With Ansible Tower With A Hands-On
+Ansible facts can be thought of as a way for Ansible to get information about a host and store it in variables for easy access. This information, which is stored in predefined variables, is available for use in the playbook. To generate facts, Ansible runs the set-up module
 
 25. When should you test playbooks and roles?
 In Ansible, tests can be added to both new and existing playbooks. Therefore, most testing jobs offer clean hosting each time we use them. Using this testing methodology, we only need to make very minimal or zero code changes.
@@ -380,10 +376,10 @@ Ansible vault is used to keep sensitive data, like passwords, rather than placin
 
 To encrypt the data, the following command is given:
 
-Command: ansible-vault encrypt foo.yml bar.yml baz.yml
+``Command: ansible-vault encrypt foo.yml bar.yml baz.yml``
 To decrypt the data,  the following command is given:
 
-Command: ansible-vault decrypt foo.yml bar.yml baz.yml
+``Command: ansible-vault decrypt foo.yml bar.yml baz.yml``
 31. How do we write an Ansible handler with multiple tasks?
 Suppose you want to create a handler that restarts a service only if it is already running.
 
@@ -462,3 +458,19 @@ There are three testing methods available, which are mentioned below:
 * Check Mode: Check mode shows you how everything would run without the simulation. Therefore, you can easily see if the project behaves the way we expected it to. The limitation is that check mode does not run the scripts and commands used in the roles and playbooks. To get around this, we have to disable check mode for specific tasks by running the command given below:
 ``Command: check_mode: no``
 * Manual Run: The play is simply run to verify whether the system is in its desired state. This testing choice is the easiest method, but it carries an increased risk because it results in a test environment that may not be similar to the production environment.
+42. Handlers: running operations on change
+* Sometimes you want a task to run only when a change is made on a machine. For example, you may want to restart a service if a task updates the configuration of that service, but not if the configuration is unchanged. Ansible uses handlers to address this use case. Handlers are tasks that only run when notified.
+Handler example:
+Notifying handlers
+Naming handlers
+Controlling when handlers run
+Using variables with handlers
+Handlers in roles
+Includes and imports in handlers
+Meta tasks as handlers
+Limitations
+43. why we use ansible facts : 
+* we are used ansible facts for the particuler task or application in particuler distribution
+44. Difference between become and become_user in Ansible?
+* understanding difference between become and become_user. As I understand it become_user is something similar to su <username>, and become means something like sudo su or "perform all commands as a sudo user". But sometimes these two directives are mixed.
+  
