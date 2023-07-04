@@ -55,7 +55,7 @@ sudo apt install ansible -y
 ansible --version
 ```
 ![preview](../../ansibleimages/ans5.png)
-* To check the ansible inventory`` ansible -i inventory -m ping all``
+* To check the ansible inventory``ansible -i inventory -m ping all``if we have host``vi hosts`` && ``ansible -i hosts -m ping all``
 * see previews
 ![preview](../../ansibleimages/ans6.png)
 * In node 1 we can create only user and passwd authntication yes and give sudoers permission

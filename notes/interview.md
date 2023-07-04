@@ -4,6 +4,7 @@ Ansible Interview Questions
 * It is an open-source automation tool, or platform, used for IT tasks such as configuration management, application deployment, intraservice orchestration, and provisioning.
 * Ansible is a tool written in Python, and it uses the declarative markup language YAML to describe the desired state of devices and configuration. In association with the idea of a "desired state," Ansible also uses the concept of idempotency.(Ansible it means after 1 run of a playbook to set things to the desired state, further runs of the same playbook should result in 0 changes.)[referhere](https://gauravtank2203.medium.com/idempotency-in-ansible-using-httpd-977239f99075)
 * Function of Ansible roles allow you to develop reusable automation components by grouping and encapsulating related automation artifacts, like configuration files, templates, tasks, and handlers.
+
 # What is a node in Ansible?
 * Ansible control nodes are primarily used to run tasks on managed hosts. You can use any machine with Python installed as an Ansible control node. However, you cannot use Windows as an Ansible control node. Managed nodes: Hosts that you manage using Ansible.
 Inventory: A list of managed nodes.
@@ -186,7 +187,7 @@ It requires minimal resources, so there is low overhead.
 It is easy to learn and understand since Ansible tasks are written in YAML.
 Unlike other tools, most of which are procedural, Ansible is declarative; it defines the desired state and fulfills the requirements needed to achieve it.
 5. What is the Ansible Galaxy?
-* Ansible galaxy is nothing but roles ,clients are created roles and send it in ansible-galaxy,and we are also created our own role and send itin galaxy 
+* Ansible galaxy is nothing but roles ,clients are created roles and send it in ansible-galaxy,and we are also created our own role and send it in galaxy 
 Ansible can communicate with configured clients from the command line by using the Ansible command. It also allows you to automate configuration by using the Ansible-playbook command. To create the base directory structure, you can use a tool bundled with Ansible, known as Ansible Galaxy.
 
 Command: ansible-galaxy init azavea. Packer
