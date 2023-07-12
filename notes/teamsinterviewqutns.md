@@ -42,7 +42,11 @@ All templating happens on the Ansible controller before the task is sent and exe
 9. Which modules do you commonly use in your organization when working with Ansible?
 * [referhere](https://opensource.com/article/19/9/must-know-ansible-modules)
 * Module: Ansible modules are standalone scripts that can be used inside an Ansible playbook. A playbook consists of a play, and a play consists of tasks. 
+* debug module: This module prints statements during execution and can be useful for debugging variables or expressions without necessarily halting the playbook.
 
+Useful for debugging together with the ‘when:’ directive.
+
+This module is also supported for Windows targets.
 10. Can you explain the concepts of roles, tasks, and handlers in Ansible?
 Roles:
 ------

@@ -28,9 +28,9 @@
         verbosity: 1
     - name: install httpd php server
       ansible.builtin.package:
-        name: "{{ item }}"
+        name: "{{ item }}"           # item is httpd or apache2
         state: present
-      loop: "{{ php_packages }}"
+      loop: "{{ php_packages }}"     #php_packages it is variable see in the hosts file
       notify:
         - restart apache
     - name: debug php modules installed
