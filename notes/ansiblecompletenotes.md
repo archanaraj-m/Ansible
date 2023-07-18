@@ -169,7 +169,7 @@ sudo systemctl restart apache2
 * Problems to be addressed
     * during every playbook execution the apache service is getting restarted
 
-* Activity 3: Install lamp stack on Redhat 9
+# Activity 3: Install lamp stack on Redhat 9
 * Manual steps
 ```
 sudo yum install httpd -y
@@ -190,7 +190,7 @@ sudo systemctl restart httpd
 
 # Ansible Handlers
 * Handlers: Handlers are tasks that only run when notified.
-* for the documentation [ReferHere](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_handlers.html#handlers)
+* For the documentation [ReferHere](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_handlers.html#handlers)
 * Refer in my yamlfiles handlers folder for the changes with handlers included
 * Info.php copying step changed i.e. copied the file to meet desired state so restart executed
 * Info.pyhp copying step was ok i.e. desired state is met so task did nothing, so restart not executed
@@ -275,7 +275,7 @@ all:
 sudo apt install git
 sudo yum install git
 ```
-# Using Variables
+# Ansible Variables
 * Ansible uses variables to manage differences between systems. With Ansible, you can execute tasks and playbooks on multiple different systems with a single command. To represent the variations among those different systems, you can create variables with standard YAML syntax, including lists and dictionaries. You can define these variables in your playbooks, in your inventory, in re-usable files or roles, or at the command line. You can also create variables during a playbook run by registering the return value or values of a task as a new variable.
 * [ReferHere](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_variables.html) for the official docs on variables
 * Refer in my ansible=>yamlfiles=>handlers=>hosts changeset containing variables
@@ -295,7 +295,7 @@ sudo yum install git
 ---
 java_package: openjdk-11-jdk
 ```
-*  and in the hosts file also changed group name tomcat
+* And in the hosts file also changed group name tomcat
 ```
 [tomcat]
 172.31.27.136 
@@ -316,3 +316,4 @@ java_package: openjdk-11-jdk
 ![preview](../ansibleimages/ans28.png)
 * Based on manual commands we can search in google ansible modules(example:user module in ansible, group module in ansible)after that based on parameters we will write the playbook.
 * And if needed we can create variables for that in tomcat.yml(it's for variables)
+* 

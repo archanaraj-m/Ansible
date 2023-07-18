@@ -47,6 +47,7 @@ All templating happens on the Ansible controller before the task is sent and exe
 Useful for debugging together with the ‘when:’ directive.
 
 This module is also supported for Windows targets.
+
 10. Can you explain the concepts of roles, tasks, and handlers in Ansible?
 Roles:
 ------
@@ -71,7 +72,6 @@ Command: update <software_name>
 handlers:
 ---------
  Handlers are used to trigger the status of a service such as restarting or stopping a service.
-
 
 11.  How do you configure group inventory in Ansible?
 * hosts is collection of all machines,but group is collection of individual machines and operating system.
@@ -126,3 +126,26 @@ JSON string format``ansible-playbook release.yml --extra-vars '{"version":"1.23.
 * In ansible we use custom modules
 * Advantages of collections it is easy to find modules,in collections have roles and modules
 * For create the role command is``ansible-galaxy role init <rolename>``example ``ansible-galaxy role init skelton``
+
+# Facts vs variables
+Ansible facts are data collected about the (target) systems on which Ansible takes actions. They are variables, but set by Ansible (in a way like system defined variables). They are collected during Gathering Facts stage of a playbook run, and it is controlled by the gather_facts setting. Ansible calls this variables discovered from systems. That said, it is possible to set custom facts also.
+Some examples are:
+
+ansible_hostname - the FQDN of the target system
+ansible_os_family - the Operating System family of target system (RedHat, Debian, etc.)
+
+# variables
+* The other variables are the ones we can set as per our requirement (in a way like user defined variables).
+
+Some examples are:
+
+my_fav_fruits: [ 'orange', 'apple', 'banana' ] - yours might differ.
+config_dir: '/etc/my_app/conf.d' - for my application configuration files.
+
+# Tags
+* If you have a large playbook, it may be useful to run only specific parts of it instead of running the entire playbook. You can do this with Ansible tags. Using tags to execute or skip selected tasks is a two-step process:
+
+* Add tags to your tasks, either individually or with tag inheritance from a block, play, role, or import.
+
+* Select or skip tags when you run your playbook.
+

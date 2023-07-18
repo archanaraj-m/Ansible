@@ -134,7 +134,7 @@ Ansible can communicate with configured clients from the command line by using t
 Command: ansible-galaxy init azavea. Packer
 Check out this Ansible tutorial and practice for getting a better understanding of Ansible.
 
-1. What is CI/CD?
+6. What is CI/CD?
 Continuous Integration (CI) is something that is used for streamlining the development and deployment processes. This has led to the rapid development of cohesive software. Each integration is verified by an automated build to detect integration errors as quickly as possible.
 
 With Continuous Delivery (CD), your code can be taken to production at any time after being pushed to a remote repository. It is, in simpler words, a process where you build software in such a way that it can be released to production at any time.
@@ -177,7 +177,7 @@ A tag is an attribute that sets the Ansible structure, plays, tasks, and roles. 
 14.  Which protocol does Ansible use to communicate with Linux and Windows?
 In Linux systems, the Secure Shell (SSH) protocol is employed, while Windows systems utilize the Windows Remote Management (WinRM) protocol.
 
-15. What are ad hoc commands? Give an example.
+15. What are adhoc commands? Give an example.
 Ad hoc commands are simple, one-line commands used to perform a certain task. You can think of ad hoc commands as an alternative to writing playbooks. An example of an ad hoc command is as follows:
 
 Command: ansible host -m netscaler -a "nsc_host=nsc.example.com user=apiuser password=apipass"
