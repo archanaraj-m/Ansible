@@ -316,4 +316,88 @@ java_package: openjdk-11-jdk
 ![preview](../ansibleimages/ans28.png)
 * Based on manual commands we can search in google ansible modules(example:user module in ansible, group module in ansible)after that based on parameters we will write the playbook.
 * And if needed we can create variables for that in tomcat.yml(it's for variables)
-* 
+* write the playbook for each task step by step with use of modules. 
+* Downloading tomcat into temp directory with use of get_url module,in this we have to use destination(dest:/tmp/apache)
+* For the changes to extract tomcat we can use unarchive module, in this module having src& dest, and we can give remote_src: yes beacause give permission to root directory.
+* For the symlink changes we can use file module in that (state: link )parameters are there[ReferHere](https://docs.ansible.com/ansible/2.9/modules/file_module.html#synopsis)
+* For changes to change home directory ownership we can use file module again but in this we use recurse parameters see once above referhere link in that recurese option is there it is used for only state: directory.
+* Lets directly run the linux command form ansible. This is not idempotent.
+* The shell module takes the command name followed by a list of space-delimited arguments.
+* Either a free form command or cmd parameter is required, see the examples.
+    * example :
+    - name: Add execute permissions for shell scripts
+      ansible.builtin.shell:
+        cmd: "chmod +x {{ homedir }}/latest/bin/*.sh"
+* For that we can use shell module in that we can use cmd parameter [ReferHere](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/shell_module.html)
+* We need to create a service file but it has dynamic content, so copying static file is not an option, Ansible has templating
+     * for expressions we use jinja templates [Refer Here](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_templating.html)
+     * for module we use template module [Refer Here](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/template_module.html)
+* example:
+    - name: copy the service file
+      ansible.builtin.template:
+        src: tomcat.service.j2
+        dest: /etc/systemd/system/tomcat.service
+      notify:
+        - reload daemon
+* In that service file we can copy the service file content and paste it in same folder VCS(visualstudiocode)
+* This should bring up the tomcat server
+* [Refer Here](https://github.com/asquarezone/AnsibleZone/commit/dec9bb66635ba0a1823f98403de2e17fa38e8b9e)for the steps to configure tomcat management interface
+* As of now we have written the playbook which works on ubuntu and installs tomcat
+
+# Ansible Tags
+* If you have a large playbook, it may be useful to run only specific parts of it instead of running the entire playbook. You can do this with Ansible tags. Using tags to execute or skip selected tasks is a two-step process:
+   * Add tags to your tasks, either individually or with tag inheritance from a block,  play, role, or import.
+   * Select or skip tags when you run your playbook.
+* Ansible tags documentation[ReferHere](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_tags.html)
+
+# Ansible Roles
+* Roles
+* Roles let you automatically load related vars, files, tasks, handlers, and other Ansible artifacts based on a known file structure. After you group your content in roles, you can easily reuse them and share them with other users.
+* An Ansible role has a defined directory structure with eight main standard directories. You must include at least one of these directories in each role. You can omit any directories the role does not use. For example:
+* playbooks
+    site.yml
+    webservers.yml
+    fooservers.yml
+* By default Ansible will look in each directory within a role for a main.yml file for relevant content (also main.yaml and main):
+
+tasks/main.yml - the main list of tasks that the role executes.
+
+handlers/main.yml - handlers, which may be used within or outside this role.
+
+library/my_module.py - modules, which may be used within this role (see Embedding modules and plugins in roles for more information).
+
+defaults/main.yml - default variables for the role (see Using Variables for more information). These variables have the lowest priority of any variables available, and can be easily overridden by any other variable, including inventory variables.
+
+vars/main.yml - other variables for the role (see Using Variables for more information).
+
+files/main.yml - files that the role deploys.
+
+templates/main.yml - templates that the role deploys.
+
+meta/main.yml - metadata for the role, including role dependencies and optional Galaxy metadata such as platforms supported.
+* for the roles documentation [referhere](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_reuse_roles.html) 
+* for role with tomcat 10 [ReferHere](https://github.com/asquarezone/AnsibleZone/tree/master/May23/roleusages)
+* Role for installing phpinfo page for the changes [ReferHere](https://github.com/asquarezone/AnsibleZone/commit/45016d150335eccb4e3a4ec48c3d76984b3098fe)
+* for calling the role
+```yml
+---
+- name: install tomcat
+  become: yes
+  hosts: tomcat 
+  roles:
+    - tomcat10
+```
+* Lets use a role to install mysql
+* Lets use the role Refer Here, so install it ``ansible-galaxy install robertdebock.mysql``
+*
+```
+---
+- name: Converge
+  hosts: all
+  become: yes
+  gather_facts: yes
+  roles:
+    - role: robertdebock.mysql
+      vars:
+        mysql_bind_address: "0.0.0.0"
+```        

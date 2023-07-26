@@ -127,6 +127,8 @@ JSON string format``ansible-playbook release.yml --extra-vars '{"version":"1.23.
 * Advantages of collections it is easy to find modules,in collections have roles and modules
 * For create the role command is``ansible-galaxy role init <rolename>``example ``ansible-galaxy role init skelton``
 
+# Handlers: running operations on change
+* Sometimes you want a task to run only when a change is made on a machine. For example, you may want to restart a service if a task updates the configuration of that service, but not if the configuration is unchanged. Ansible uses handlers to address this use case. Handlers are tasks that only run when notified.
 # Facts vs variables
 Ansible facts are data collected about the (target) systems on which Ansible takes actions. They are variables, but set by Ansible (in a way like system defined variables). They are collected during Gathering Facts stage of a playbook run, and it is controlled by the gather_facts setting. Ansible calls this variables discovered from systems. That said, it is possible to set custom facts also.
 Some examples are:
