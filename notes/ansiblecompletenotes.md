@@ -389,8 +389,8 @@ meta/main.yml - metadata for the role, including role dependencies and optional 
 ```
 * Lets use a role to install mysql
 * Lets use the role Refer Here, so install it ``ansible-galaxy install robertdebock.mysql``
-*
-```
+
+```yml
 ---
 - name: Converge
   hosts: all
@@ -401,3 +401,29 @@ meta/main.yml - metadata for the role, including role dependencies and optional 
       vars:
         mysql_bind_address: "0.0.0.0"
 ```        
+# Ansible Collections
+* collections are combination of reusable roles and modules
+* in the collections we can create our ownmodule 
+* Ansible collections are distribution format which include roles and modules
+* [Refer Here](https://docs.ansible.com/ansible/latest/collections_guide/index.html) for offical docs
+* [Refer Here](https://github.com/ansible-collections/community.mysql) for sample collection.
+* only some oraganizations use this collections not everyone use, this is the rare case.
+
+# Ansible Configurations
+* Ansible on Windows
+   * Connectivity method will be winrm [Refer Here](https://learn.microsoft.com/en-us/windows/win32/winrm/portal)
+   * [Refer Here](https://directdevops.blog/2021/05/24/devops-classroom-series-23-may-2021/) for the classroom notes
+   * [Refer Here](https://docs.ansible.com/ansible/latest/os_guide/windows_setup.html) for setting up windows host
+   * Lets use some of the modules for windows [Refer Here](https://docs.ansible.com/ansible/2.9/modules/list_of_windows_modules.html)
+Sample playbook
+```yml
+---
+- name: install something on windows
+  hosts: all
+  tasks:
+    - name: enable iis server
+      win_feature:
+        name: Web-Server
+        include_management_tools: yes
+        state: present
+```
