@@ -25,14 +25,16 @@ Configuration Management is all about declarative deployment of applications whi
    * Push => CM Server to Node
 * Ansible is a configuration management platform that automates storage, servers, and networking. When you use Ansible to configure these components, difficult manual tasks become repeatable and less vulnerable to error.
 * There are two types of CM
-Pull based CM:
+
+# Pull based CM:
 --------------
 * In this type of configuration management tool, the nodes pull the configuration information from the server (hence, the name).A small software (called agent or client) is installed on every node.
 * This agent/client will:at regular intervals, get the configuration from the server compare the configuration received from the server with the current configuration of the node, if there is any mis-match, take the steps required to match the configuration of the node with the configuration received from the server.
   * Chef & 
   * Puppet are good examples for pull based configuration management tools.
 ![preview](../ansibleimages/ans.png)
-Push Based CM:
+
+# Push Based CM:
 -------------- 
 * In this type of configuration management tool, the main server (where the configuration data is stored) pushes the configuration to the node (hence, the name). So, it is the main server that initiates communication, not the nodes. Which means that an agent/client may or may not be installed on each node.
   * Ansible & 

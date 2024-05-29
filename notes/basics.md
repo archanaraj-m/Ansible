@@ -16,7 +16,7 @@
 * knowing the problem. log files and read the logs to figure out errors
 * installation steps and configuration steps for any application
 * Concept of environmental variables and setting
-    * User-if we createvariables for any particuler user i.e user environmental variables
+    * User-if we create variables for any particuler user i.e user environmental variables
     * System-if we create variables for admin i.e system environmental variables 
 # Expert Check list
   * Understanding system architectures
