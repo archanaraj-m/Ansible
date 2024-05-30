@@ -65,6 +65,8 @@ Configuration Management is all about declarative deployment of applications whi
 # How to setup key pair based authentication in linux machines
 * Key pair is combination of two keys public and private using alogrithms, we will be using RSA
 * Create a key pair ``ssh-keygen``
+* ![preview](../ansibleimages/ans1.png)
+* ![preview](../ansibleimages/ans4.png)
 * After that Copy the public key to linux machine <ssh-copy-id username@ipaddress> example``ssh-copy-id devops@172.168.123.11``
 * connect to the machine using private key ``ssh -i <path-to-private key> username@ipaddress``
 * Generally private keys created will have extension of .pem
@@ -72,7 +74,9 @@ Configuration Management is all about declarative deployment of applications whi
 # Setting up sudo permissions
 * We need to add devops user to the sudoers group (Wheel)
 * Execute ``sudo visudo``in that insert`` devops ALL=(ALL:ALL) NOPASSWD:ALL``
-* Environment
+* ![preview](../ansibleimages/ans2.png)
+* ![preview](../ansibleimages/ans3.png)
+# Environment
 * We need atleast two linux machines
     * one is Ansible control node
     * others is/are nodes
@@ -94,16 +98,19 @@ sudo apt install ansible -y
 * Verify ansible version ``ansible --version``
 * Now lets add inventory. Create a file called as ``vi hosts`` with one entry <ip address>
 * Check connectivity by executing ``ansible -i hosts -m ping all``
+* ![preview](../ansibleimages/ans5.png)
+* ![preview](../ansibleimages/ans6.png)
 # Note:
 * To enable password authentications edit config ``sudo vi /etc/ssh/sshd_config`` and set PasswordAuthentication to yes from no.
 * restart sshd service ``sudo service sshd restart``
+* ![preview](../ansibleimages/ans7.png)
 
 # Ansible
 Ansible can communicate with nodes by using two approaches
 1. adhoc commands:
 * We build a command for desired state
-* It's not reuseable,and it is used for quick teast and changes
-* it is used for a single task execute quickly,it's running without write a playbook.
+* It's not reuseable,and it is used for quick test and changes
+* It is used for a single task execute quickly,it's running without write a playbook.
 
 # playbook:
 * We create a file where we express desired state
@@ -171,7 +178,13 @@ sudo systemctl restart apache2
 * Verify the installation with ``<IPaddress>/info.php``
 * Problems to be addressed
     * during every playbook execution the apache service is getting restarted
-
+* ![preview](../ansibleimages/ans8.png)
+* ![preview](../ansibleimages/ans9.png)
+* ![preview](../ansibleimages/ans10.png)
+* ![preview](../ansibleimages/ans11.png)
+* ![preview](../ansibleimages/ans12.png)
+* ![preview](../ansibleimages/ans13.png)
+* ![preview](../ansibleimages/ans21.png)
 # Activity 3: Install lamp stack on Redhat 9
 * Manual steps
 ```
@@ -185,6 +198,13 @@ exit
 sudo systemctl restart httpd
 ```
 * Refer in my ansible yamlfiles folder for the changeset containing playbook(redhat.yaml)
+* ![preview](../ansibleimages/ans14.png)
+* ![preview](../ansibleimages/ans15.png)
+* ![preview](../ansibleimages/ans16.png)
+* ![preview](../ansibleimages/ans17.png)
+* ![preview](../ansibleimages/ans18.png)
+* ![preview](../ansibleimages/ans19.png)
+* ![preview](../ansibleimages/ans20.png)
 * Problems
     * during every playbook execution the apache service is getting restarted
     * Why should we have two inventory files one for ubuntu and one for redhat
