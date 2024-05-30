@@ -64,6 +64,8 @@ Configuration Management is all about declarative deployment of applications whi
 
 # How to setup key pair based authentication in linux machines
 * Key pair is combination of two keys public and private using alogrithms, we will be using RSA
+* first execute this command in all nodes (ACN) and another nodes ``sudo apt update``
+* Next give the sudo permissions ``sudo visudo``
 * Create a key pair ``ssh-keygen``
 * ![preview](../ansibleimages/ans1.png)
 * ![preview](../ansibleimages/ans4.png)
