@@ -29,7 +29,7 @@ Configuration Management is all about declarative deployment of applications whi
 # Pull based CM:
 --------------
 * In this type of configuration management tool, the nodes pull the configuration information from the server (hence, the name).A small software (called agent or client) is installed on every node.
-* This agent/client will:at regular intervals, get the configuration from the server compare the configuration received from the server with the current configuration of the node, if there is any mis-match, take the steps required to match the configuration of the node with the configuration received from the server.
+* This agent/client will at regular intervals, get the configuration from the server compare the configuration received from the server with the current configuration of the node, if there is any mis-match, take the steps required to match the configuration of the node with the configuration received from the server.
   * Chef & 
   * Puppet are good examples for pull based configuration management tools.
 ![preview](../ansibleimages/ans.png)
@@ -44,7 +44,8 @@ Configuration Management is all about declarative deployment of applications whi
 * What is required in Push Based CM
   * List of nodes (inventory)
   * Credentials to login into node
-Architecture of Ansible
+
+# Architecture of Ansible
 ------------------------
 * Ansible works by connecting to your nodes and pushing out scripts called “Ansible modules” to them. Most modules accept parameters that describe the desired state of the system. Ansible then executes these modules (over SSH by default), and removes them when finished. Your library of modules can reside on any machine, and there are no servers, daemons, or databases required.
 ![preview](../ansibleimages/ans0.png)
@@ -64,7 +65,7 @@ Architecture of Ansible
 # How to setup key pair based authentication in linux machines
 * Key pair is combination of two keys public and private using alogrithms, we will be using RSA
 * Create a key pair ``ssh-keygen``
-* after that Copy the public key to linux machine <ssh-copy-id username@ipaddress> example``ssh-copy-id devops@172.168.123.11``
+* After that Copy the public key to linux machine <ssh-copy-id username@ipaddress> example``ssh-copy-id devops@172.168.123.11``
 * connect to the machine using private key ``ssh -i <path-to-private key> username@ipaddress``
 * Generally private keys created will have extension of .pem
 * i.e we create a Service account public and private key. Copy the service account public key to all the servers. disable password based authentication
@@ -91,7 +92,7 @@ sudo add-apt-repository --yes --update ppa:ansible/ansible
 sudo apt install ansible -y
 ```
 * Verify ansible version ``ansible --version``
-* Now lets add inventory. Create a file called as ``vi hosts`` with one entry <ipaddress>
+* Now lets add inventory. Create a file called as ``vi hosts`` with one entry <ip address>
 * Check connectivity by executing ``ansible -i hosts -m ping all``
 # Note:
 * To enable password authentications edit config ``sudo vi /etc/ssh/sshd_config`` and set PasswordAuthentication to yes from no.
@@ -142,11 +143,11 @@ sudo apt install apache2 -y
 * Verify the installation in new tab ``http://<public-ip>``
 * [ReferHere](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_intro.html) for ansible yaml syntax for playbook
 * Finding the module:
-    * search google with <command> in ansible, example command name copy or search "wget module in ansible"
+    * search google with ``<command>`` in ansible, example command name copy or search "wget module in ansible"
     * search from ansible modules docs [ReferHere](https://docs.ansible.com/ansible/2.9/modules/modules_by_category.html)
 * all the commands for installation are executed with sudo so we can give ``become: yes`` in playbook.
 * create inventory``vi hosts``
-* Run the command ansible-playbook -i <inventory-path> <playbook-path>
+* Run the command ``ansible-playbook -i <inventory-path> <playbook-path>``
 * If we create 2directories with names inventory and playbook we need to give path otherwise we can run playbook directly.
 ![preview](../ansibleimages/ans26.png)
 
