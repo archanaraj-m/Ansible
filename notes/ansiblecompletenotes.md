@@ -57,17 +57,21 @@ Configuration Management is all about declarative deployment of applications whi
 # How Operations Team work on multiple servers
 * Organizations will have lot of servers and lot of admins
 * Creating individual logins on each server for every admin is not a feasible solution.
-* An effective way is organization creates a service account for the admins to login and   perform administration.
+* An effective way is organization creates a service account for the admins to login and perform administration.
 ![preview](../ansibleimages/ans00.png)
 * For the lab activities our service account’s name would be devops
 * Having username and password is not a sensible option then how to solve this problem
 
 # How to setup key pair based authentication in linux machines
 * Key pair is combination of two keys public and private using alogrithms, we will be using RSA
-* first execute this command in all nodes (ACN) and another nodes ``sudo apt update``
+* First execute this command in all nodes (ACN) and another nodes ``sudo apt update``
+* Then give the password authntication yes from no ``sudo vi /etc/ssh/sshd_config``
+* ![preview](../ansibleimages/ans2.png)
+* Next restart the sshd ``sudo systemctl restart sshd``
+* ![preview](../ansibleimages/ans1.png)
+* create the user ``sudo adduser <username>`` ``sudo adduser devops``
 * Next give the sudo permissions ``sudo visudo``
 * Create a key pair ``ssh-keygen``
-* ![preview](../ansibleimages/ans1.png)
 * ![preview](../ansibleimages/ans4.png)
 * After that Copy the public key to linux machine <ssh-copy-id username@ipaddress> example``ssh-copy-id devops@172.168.123.11``
 * connect to the machine using private key ``ssh -i <path-to-private key> username@ipaddress``
@@ -76,7 +80,6 @@ Configuration Management is all about declarative deployment of applications whi
 # Setting up sudo permissions
 * We need to add devops user to the sudoers group (Wheel)
 * Execute ``sudo visudo``in that insert`` devops ALL=(ALL:ALL) NOPASSWD:ALL``
-* ![preview](../ansibleimages/ans2.png)
 * ![preview](../ansibleimages/ans3.png)
 # Environment
 * We need atleast two linux machines
@@ -88,10 +91,12 @@ Configuration Management is all about declarative deployment of applications whi
 * Optional: Disable password based authentication
 
 # Installing and Configuring Ansible
-We will create two ubuntu vms
-Create a user called devops in two vms with sudo permissions
-Create a key-pair in ansible control node & copy the public key to other vm from ansible control node
-* Installing ansible
+* We will create two ubuntu vms
+* Create a user called devops in two vms with sudo permissions
+* Create a key-pair in ansible control node & copy the public key to other vm from ansible control node
+
+Installing ansible
+------------------
 ```
 sudo apt install software-properties-common -y
 sudo add-apt-repository --yes --update ppa:ansible/ansible
