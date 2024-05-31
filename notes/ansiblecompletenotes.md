@@ -46,7 +46,9 @@ Configuration Management is all about declarative deployment of applications whi
   * Credentials to login into node
 
 # Architecture of Ansible
-------------------------
+-------------------------
+* Ansible is an open source software developed in python.
+* Ansible expects python to be installed on nodes.
 * Ansible works by connecting to your nodes and pushing out scripts called “Ansible modules” to them. Most modules accept parameters that describe the desired state of the system. Ansible then executes these modules (over SSH by default), and removes them when finished. Your library of modules can reside on any machine, and there are no servers, daemons, or databases required.
 ![preview](../ansibleimages/ans0.png)
 * Ansible control node can execute desired state on nodes using
@@ -75,6 +77,7 @@ Configuration Management is all about declarative deployment of applications whi
 * ![preview](../ansibleimages/ans4.png)
 * After that Copy the public key to linux machine <ssh-copy-id username@ipaddress> example``ssh-copy-id devops@172.168.123.11``
 * connect to the machine using private key ``ssh -i <path-to-private key> username@ipaddress``
+* ![preview](../ansibleimages/ans29.png)
 * Generally private keys created will have extension of .pem
 * i.e we create a Service account public and private key. Copy the service account public key to all the servers. disable password based authentication
 # Setting up sudo permissions
@@ -157,7 +160,7 @@ echo 172.31.14.123(anothernode private IPaddress) > inventory
 #like this echo 172.31.14.123 > inventory
 cat inventory
 ```
-* Ansible Installation commands are
+* Ansible Installation in ubuntu commands are
 ```
 sudo apt update
 sudo apt install software-properties-common
@@ -166,6 +169,13 @@ sudo apt install ansible -y
 ansible --version
 ```
 ![preview](../../ansibleimages/ans5.png)
+
+* Ansible Installation in Centos 7 commands are 
+```
+sudo yum install epel-release -y
+sudo yum install ansible -y
+```
+* The above commands didnt work in Centos 8 distribution. (To be fixed)
 * To check the ansible inventory``ansible -i inventory -m ping all``if we have host``vi hosts`` && ``ansible -i hosts -m ping all``
 * see previews
 ![preview](../../ansibleimages/ans6.png)
