@@ -160,7 +160,11 @@ echo 172.31.14.123(anothernode private IPaddress) > inventory
 #like this echo 172.31.14.123 > inventory
 cat inventory
 ```
+
+* Ansible Setup:
+![Refer Here](https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html) for any os installation and ![Refer Here](https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html#installing-ansible-on-ubuntu) for ubuntu
 * Ansible Installation in ubuntu commands are
+* 
 ```
 sudo apt update
 sudo apt install software-properties-common
