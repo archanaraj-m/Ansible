@@ -162,6 +162,7 @@ sudo apt install ansible -y
 ansible --version
 ```
 ![preview](../ansibleimages/ans5.png)
+
 * connect ACN to node1 commands are
 ```
 ssh-copy-id username@anothernode privateIP address       
@@ -427,9 +428,12 @@ java_package: openjdk-11-jdk
 * The shell module takes the command name followed by a list of space-delimited arguments.
 * Either a free form command or cmd parameter is required, see the examples.
     * example :
+  ```yaml
     - name: Add execute permissions for shell scripts
       ansible.builtin.shell:
         cmd: "chmod +x {{ homedir }}/latest/bin/*.sh"
+
+  ```      
 * For that we can use shell module in that we can use cmd parameter [ReferHere](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/shell_module.html)
 * We need to create a service file but it has dynamic content, so copying static file is not an option, Ansible has templating
      * for expressions we use jinja templates [Refer Here](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_templating.html)
