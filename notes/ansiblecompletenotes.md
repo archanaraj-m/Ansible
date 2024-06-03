@@ -151,6 +151,17 @@ cd .ssh
 ls
 cd 
 ```
+* Ansible Setup:
+[Refer Here](https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html) for any os installation and [Refer Here](https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html#installing-ansible-on-ubuntu) for ubuntu
+* Ansible Installation in ubuntu commands are
+```
+sudo apt update
+sudo apt install software-properties-common
+sudo add-apt-repository --yes --update ppa:ansible/ansible
+sudo apt install ansible -y
+ansible --version
+```
+![preview](../ansibleimages/ans5.png)
 * connect ACN to node1 commands are
 ```
 ssh-copy-id username@anothernode privateIP address       
@@ -160,19 +171,6 @@ echo 172.31.14.123(anothernode private IPaddress) > inventory
 #like this echo 172.31.14.123 > inventory
 cat inventory
 ```
-
-* Ansible Setup:
-[Refer Here](https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html) for any os installation and [Refer Here](https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html#installing-ansible-on-ubuntu) for ubuntu
-* Ansible Installation in ubuntu commands are
-
-```
-sudo apt update
-sudo apt install software-properties-common
-sudo add-apt-repository --yes --update ppa:ansible/ansible
-sudo apt install ansible -y
-ansible --version
-```
-![preview](../ansibleimages/ans5.png)
 
 * Ansible Installation in Centos 7 commands are 
 ```
