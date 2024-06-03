@@ -137,7 +137,7 @@ same process for all 2 nodes for centos another commands
 ![preview](../ansibleimages/ans1.png)
 ![preview](../ansibleimages/ans2.png)
 ![preview](../ansibleimages/ans3.png)
-![preview](../../ansibleimages/ans4.png)
+![preview](../ansibleimages/ans4.png)
 
 In ACN
 -------
@@ -162,7 +162,7 @@ cat inventory
 ```
 
 * Ansible Setup:
-![Refer Here](https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html) for any os installation and ![Refer Here](https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html#installing-ansible-on-ubuntu) for ubuntu
+[Refer Here](https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html) for any os installation and [Refer Here](https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html#installing-ansible-on-ubuntu) for ubuntu
 * Ansible Installation in ubuntu commands are
 
 ```
@@ -172,7 +172,7 @@ sudo add-apt-repository --yes --update ppa:ansible/ansible
 sudo apt install ansible -y
 ansible --version
 ```
-![preview](../../ansibleimages/ans5.png)
+![preview](../ansibleimages/ans5.png)
 
 * Ansible Installation in Centos 7 commands are 
 ```
@@ -182,9 +182,9 @@ sudo yum install ansible -y
 * The above commands didnt work in Centos 8 distribution. (To be fixed)
 * To check the ansible inventory``ansible -i inventory -m ping all``if we have host``vi hosts`` && ``ansible -i hosts -m ping all``
 * see previews
-![preview](../../ansibleimages/ans6.png)
+![preview](../ansibleimages/ans6.png)
 * In node 1 we can create only user and passwd authntication yes and give sudoers permission
-![preview](../../ansibleimages/ans7.png)
+![preview](../ansibleimages/ans7.png)
 
 # Ansible
 Ansible can communicate with nodes by using two approaches
@@ -464,24 +464,25 @@ java_package: openjdk-11-jdk
     fooservers.yml
 * By default Ansible will look in each directory within a role for a main.yml file for relevant content (also main.yaml and main):
 
-tasks/main.yml - the main list of tasks that the role executes.
+    * tasks/main.yml - the main list of tasks that the role executes.
 
-handlers/main.yml - handlers, which may be used within or outside this role.
+    * handlers/main.yml - handlers, which may be used within or outside this role.
 
-library/my_module.py - modules, which may be used within this role (see Embedding modules and plugins in roles for more information).
+    * library/my_module.py - modules, which may be used within this role (see Embedding modules and plugins in roles for more information).
 
-defaults/main.yml - default variables for the role (see Using Variables for more information). These variables have the lowest priority of any variables available, and can be easily overridden by any other variable, including inventory variables.
+    * defaults/main.yml - default variables for the role (see Using Variables for more information). These variables have the lowest priority of any variables available, and can be easily overridden by any other variable, including inventory variables.
 
-vars/main.yml - other variables for the role (see Using Variables for more information).
+    * vars/main.yml - other variables for the role (see Using Variables for more information).
 
-files/main.yml - files that the role deploys.
+    * files/main.yml - files that the role deploys.
 
-templates/main.yml - templates that the role deploys.
+    * templates/main.yml - templates that the role deploys.
 
-meta/main.yml - metadata for the role, including role dependencies and optional Galaxy metadata such as platforms supported.
+    * meta/main.yml - metadata for the role, including role dependencies and optional Galaxy metadata such as platforms supported.
 * for the roles documentation [referhere](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_reuse_roles.html) 
 * for role with tomcat 10 [ReferHere](https://github.com/asquarezone/AnsibleZone/tree/master/May23/roleusages)
 * Role for installing phpinfo page for the changes [ReferHere](https://github.com/asquarezone/AnsibleZone/commit/45016d150335eccb4e3a4ec48c3d76984b3098fe)
+
 * for calling the role
 ```yml
 ---
