@@ -439,12 +439,15 @@ java_package: openjdk-11-jdk
      * for expressions we use jinja templates [Refer Here](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_templating.html)
      * for module we use template module [Refer Here](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/template_module.html)
 * example:
+```yml
     - name: copy the service file
       ansible.builtin.template:
         src: tomcat.service.j2
         dest: /etc/systemd/system/tomcat.service
       notify:
         - reload daemon
+```
+
 * In that service file we can copy the service file content and paste it in same folder VCS(visualstudiocode)
 * This should bring up the tomcat server
 * [Refer Here](https://github.com/asquarezone/AnsibleZone/commit/dec9bb66635ba0a1823f98403de2e17fa38e8b9e)for the steps to configure tomcat management interface
@@ -457,8 +460,10 @@ java_package: openjdk-11-jdk
 * Ansible tags documentation[ReferHere](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_tags.html)
 
 # Ansible Roles
-* Roles
+* Roles are nothing but playbook but in this we have different folders for every play(tasks,vars,handlers,etc),breking the playbook in to different folders.
 * Roles let you automatically load related vars, files, tasks, handlers, and other Ansible artifacts based on a known file structure. After you group your content in roles, you can easily reuse them and share them with other users.
+* for creating role command is ``ansible-galaxy role init <rolename>`` example ``ansible-galaxy role init mynewrole`` in this mynewrole is my role name.
+* role is like a library it's not run on own someone call the role means we can call the roll for that we can use this command
 * An Ansible role has a defined directory structure with eight main standard directories. You must include at least one of these directories in each role. You can omit any directories the role does not use. For example:
 * playbooks
     site.yml
@@ -466,21 +471,21 @@ java_package: openjdk-11-jdk
     fooservers.yml
 * By default Ansible will look in each directory within a role for a main.yml file for relevant content (also main.yaml and main):
 
-    * tasks/main.yml - the main list of tasks that the role executes.
+    * 1.tasks/main.yml - the main list of tasks that the role executes.
 
-    * handlers/main.yml - handlers, which may be used within or outside this role.
+    * 2.handlers/main.yml - handlers, which may be used within or outside this role.
 
-    * library/my_module.py - modules, which may be used within this role (see Embedding modules and plugins in roles for more information).
+    * 3.library/my_module.py - modules, which may be used within this role (see Embedding modules and plugins in roles for more information).
 
-    * defaults/main.yml - default variables for the role (see Using Variables for more information). These variables have the lowest priority of any variables available, and can be easily overridden by any other variable, including inventory variables.
+    * 4.defaults/main.yml - default variables for the role (see Using Variables for more information). These variables have the lowest priority of any variables available, and can be easily overridden by any other variable, including inventory variables.
 
-    * vars/main.yml - other variables for the role (see Using Variables for more information).
+    * 5.vars/main.yml - other variables for the role (see Using Variables for more information).
 
-    * files/main.yml - files that the role deploys.
+    * 6.files/main.yml - files that the role deploys.
 
-    * templates/main.yml - templates that the role deploys.
+    * 7.templates/main.yml - templates that the role deploys.
 
-    * meta/main.yml - metadata for the role, including role dependencies and optional Galaxy metadata such as platforms supported.
+    * 8.meta/main.yml - metadata for the role, including role dependencies and optional Galaxy metadata such as platforms supported.
 * for the roles documentation [referhere](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_reuse_roles.html) 
 * for role with tomcat 10 [ReferHere](https://github.com/asquarezone/AnsibleZone/tree/master/May23/roleusages)
 * Role for installing phpinfo page for the changes [ReferHere](https://github.com/asquarezone/AnsibleZone/commit/45016d150335eccb4e3a4ec48c3d76984b3098fe)
@@ -534,3 +539,7 @@ Sample playbook
         include_management_tools: yes
         state: present
 ```
+# DevOps Classroomnotes Ansible(27/dec/2023 to 29/jan/2023) better to read this it's our class notes
+# parallelism in ansible
+* Ansible forks: This represents the number of hosts in which ansible will parallely execute the playbook
+* The default number of forks are 5, This value can be changed while executing ansible command or in the configuration file.
