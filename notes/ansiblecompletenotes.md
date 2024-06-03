@@ -134,9 +134,9 @@ sudo visudo                      #devops ALL=(ALL:ALL) NOPASSWD:ALL
 ctrl+x,ENTER
 same process for all 2 nodes for centos another commands
 ```
-![preview](../../ansibleimages/ans1.png)
-![preview](../../ansibleimages/ans2.png)
-![preview](../../ansibleimages/ans3.png)
+![preview](../ansibleimages/ans1.png)
+![preview](../ansibleimages/ans2.png)
+![preview](../ansibleimages/ans3.png)
 ![preview](../../ansibleimages/ans4.png)
 
 In ACN
@@ -164,7 +164,7 @@ cat inventory
 * Ansible Setup:
 ![Refer Here](https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html) for any os installation and ![Refer Here](https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html#installing-ansible-on-ubuntu) for ubuntu
 * Ansible Installation in ubuntu commands are
-* 
+
 ```
 sudo apt update
 sudo apt install software-properties-common
