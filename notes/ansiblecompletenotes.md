@@ -543,3 +543,6 @@ Sample playbook
 # parallelism in ansible
 * Ansible forks: This represents the number of hosts in which ansible will parallely execute the playbook
 * The default number of forks are 5, This value can be changed while executing ansible command or in the configuration file.
+* This number can be changed by using fork ``ansible-playbook -f 10 ....``Ansible Vault
+# Ansible Vault
+* Ansible Vault can protect sensitive information, it is recommended to use password-file approach.

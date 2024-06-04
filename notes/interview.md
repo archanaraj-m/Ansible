@@ -279,8 +279,8 @@ The method of using hostvars is important because it is a dictionary of the enti
 
 23. What is the method to check the inventory vars defined for the host?
 This can be done by using the following command:
+``ansible -m debug -a "var=hostvars['hostname']" localhost``
 
-ansible -m debug -a "var=hostvars['hostname']" localhost
 24. Explain Ansible facts.
 Ansible facts can be thought of as a way for Ansible to get information about a host and store it in variables for easy access. This information, which is stored in predefined variables, is available for use in the playbook. To generate facts, Ansible runs the set-up module
 
@@ -325,7 +325,7 @@ To decrypt the data,  the following command is given:
 Suppose you want to create a handler that restarts a service only if it is already running.
 
 Handlers can understand generic topics, and tasks can notify those topics as shown below. This functionality makes it much easier to trigger multiple handlers. It also decouples handlers from their names, which makes it easier to share handlers among playbooks and roles.
-```
+```yml
 - name: Check if restarted
 shell: check_is_started.sh
 register: result
@@ -359,7 +359,7 @@ Registered variables are valid on the host for the remainder of the playbook run
 
 36. For how many seconds does the Ansible reboot module wait by default? Is there any way to increase the time.
 By default, the Ansible reboot module waits for 600 seconds. Yes, it is possible to increase the time taken for Ansible reboot to certain values. The syntax given below can be used for the same:
-```
+```yml
 - name: Reboot a Linux system 
 reboot:
 reboot_timeout: 1200
@@ -372,11 +372,12 @@ To put it simply, the only changes added are the ones needed, not the ones alrea
 
 38. Can you copy files recursively onto a target host? If yes, how?
 We can copy files recursively onto a target host by using the copy module. It has a recursive parameter that copies files from a directory. There is another module called synchronize, which is specifically made for this. Given below is the command for the same:
-
+```yml
 - synchronize:
     src: /first/absolute/path
     dest: /second/absolute/path
     delegate_to: "{{ inventory_hostname }}"
+```    
 39. Can you keep data a secret in the playbook?
 The following playbook might come in handy if you want to keep any task a secret in the playbook when using -v (verbose) mode:
 
