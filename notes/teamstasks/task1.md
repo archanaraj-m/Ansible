@@ -5,10 +5,10 @@ Task-1, 30-05-2023
 ------------------
 [referhere](https://directdevops.blog/2023/05/27/devops-classroomnotes-27-may-2023/) for ansible , yaml&json diference
  1. Ansible controlNode and Node configuration
-        1. take 3 machines
-            1. controlNode(ubuntu)
-            2. node1 (ubuntu)
-            3. node2 (redhat/centos)
+  * create 3 machines
+           1. controlNode(ubuntu)
+           2. node1 (ubuntu)
+           3. node2 (redhat/centos)
 * First i can create 3 instances 2 are ubuntu 1 is centos
 * connect that instances then execute the below commands in 2 nodes (ACN,node1)
 ```
