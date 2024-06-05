@@ -322,6 +322,7 @@ To encrypt the data, the following command is given:
 To decrypt the data,  the following command is given:
 
 ``Command: ansible-vault decrypt foo.yml bar.yml baz.yml``
+
 31. How do we write an Ansible handler with multiple tasks?
 * Suppose you want to create a handler that restarts a service only if it is already running.
 
@@ -345,6 +346,7 @@ ansible all -i localhost, -m debug -a "msg={{ 'mypassword' | password_hash('sha5
 We can also use the Passlib library in Python, which is mentioned below:
 
 ``Command: python -c "from passlib.hash import sha512_crypt; import getpass; print(sha512_crypt.using(rounds=5000).hash(getpass.getpass()))"``
+
 33. Explain the concept of blocks under Ansible?
 Blocks allow for logical grouping of tasks and in-play error-handling. Most of what you can apply to a single task can be applied at the block level, which also makes it much easier to set data or directives common to the tasks. This does not mean that the directive affects the block itself but is inherited by the tasks enclosed by a block, i.e., it will be applied to the tasks, not the block itself.
 
@@ -394,6 +396,7 @@ Yes, you can implement Docker modules in Ansible. For this, Ansible requires you
 The docker_service module also requires docker-compose. The command given below needs to be typed in for the same:
 
 ``Command: $ pip install 'docker-compose>=1.7.0'``
+
 41. How do you test Ansible projects?
 There are three testing methods available, which are mentioned below:
 
@@ -401,6 +404,7 @@ There are three testing methods available, which are mentioned below:
 * Check Mode: Check mode shows you how everything would run without the simulation. Therefore, you can easily see if the project behaves the way we expected it to. The limitation is that check mode does not run the scripts and commands used in the roles and playbooks. To get around this, we have to disable check mode for specific tasks by running the command given below:
 ``Command: check_mode: no``
 * Manual Run: The play is simply run to verify whether the system is in its desired state. This testing choice is the easiest method, but it carries an increased risk because it results in a test environment that may not be similar to the production environment.
+  
 42. Handlers: running operations on change
 * Sometimes you want a task to run only when a change is made on a machine. For example, you may want to restart a service if a task updates the configuration of that service, but not if the configuration is unchanged. Ansible uses handlers to address this use case. Handlers are tasks that only run when notified.
 Handler example:
@@ -418,6 +422,7 @@ Limitations
 
 44. Difference between become and become_user in Ansible?
 * understanding difference between become and become_user. As I understand it become_user is something similar to su <username>, and become means something like sudo su or "perform all commands as a sudo user". But sometimes these two directives are mixed.
+  
 45. What is Rescue in Ansible?
 * Rescue in Ansible is part of the Ansible Block and Rescue framework, used for error handling. It specifies a set of tasks that should be executed if an error occurs in any of the tasks within a block. The rescue section is akin to an exception handling mechanism found in many programming languages.
  Syntax: The rescue section is included within the block structure as shown earlier. Here's an example focusing on the rescue part:
