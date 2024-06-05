@@ -325,6 +325,7 @@ Task-3, 02-06-2023
 * If we want to reset password goto security it is below the deployments.
 ![preview](../../moniterimages/mon4.png)
 * Enable the nginx module``sudo metricbeat modules enable nginx``
+![preview](../../moniterimages/mon5.png)
 
 2. install metricbeat installation on ansible nodes by playbook.
 ----------------------------------------------------------------------------------------------------------------------------------------
